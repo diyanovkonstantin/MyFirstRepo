@@ -1,3 +1,0 @@
-# forBasha
-testGit
-new sight
