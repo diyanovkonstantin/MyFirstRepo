@@ -10,11 +10,10 @@ namespace GenericLinkedList
     {
         static void Main(string[] args)
         {
-            Node<int> n1 = new Node<int> { Data = 10, Next = null };
-            Node<int> n2 = new Node<int> { Data = 2, Next = null };
+           
             MyList<int> mylist = new MyList<int>();
-            mylist.AddFirst(n1);
-            mylist.AddFirst(n2);
+            mylist.AddFirst(1);
+            mylist.AddFirst(2);
         }
     }
 }

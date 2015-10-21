@@ -8,21 +8,26 @@ using System.Collections;
 
 namespace GenericLinkedList
 {
-    class MyList<T> : IList<Node<T>>
+    class MyList<T> : IList<T>
     {
         private Node<T> head;
 
-        public void AddFirst(Node<T> add)
+        public void AddFirst(T add)
         {
-            add.Next = head;
-            head = add;
+            Node<T> temp = new Node<T>();
+            temp.Data = add;
+            temp.Next = head;
+            head = temp;
         }
 
-        public void AddLast(Node<T> add)
+        public void AddLast(T add)
         {
+            Node<T> temp=new Node<T>();
+            temp.Data = add;
+            
             if (head == null)
             {
-                head = add;
+                head = temp;
             }
             else
             {
@@ -32,17 +37,17 @@ namespace GenericLinkedList
                 {
                     current = current.Next;
                 }
-                current.Next = add;
+                current.Next = temp;
             }
         }
 
-        public int IndexOf(Node<T> item)
+        public int IndexOf(T item)
         {
             int i = 0;
             Node<T> current = head;
             while (current != null)
             {
-                if (Object.Equals(current.Data, item.Data))
+                if (Object.Equals(current.Data, item))
                 {
                     return i;
                 }
@@ -52,9 +57,8 @@ namespace GenericLinkedList
             return -1;
         }
 
-        public void Insert(int index, Node<T> item)
+        public void Insert(int index, T item)
         {
-            item.Next = this[index].Next;
             this[index] = item;
         }
 
@@ -74,7 +78,7 @@ namespace GenericLinkedList
             }
         }
 
-        public Node<T> this[int index]
+        public T this[int index]
         {
             get
             {
@@ -91,7 +95,7 @@ namespace GenericLinkedList
                     i++;
                     current = current.Next;
                 }
-                return temp;
+                return temp.Data;
             }
             set
             {
@@ -101,7 +105,7 @@ namespace GenericLinkedList
                 {
                     if (i == index)
                     {
-                        current = value;
+                        current.Data = value;
                         break;
                     }
                     i++;
@@ -110,7 +114,7 @@ namespace GenericLinkedList
             }
         }
 
-        public void Add(Node<T> item)
+        public void Add(T item)
         {
             this.AddFirst(item);
         }
@@ -120,12 +124,12 @@ namespace GenericLinkedList
             head = null;
         }
 
-        public bool Contains(Node<T> item)
+        public bool Contains(T item)
         {
             Node<T> current = head;
             while (current != null)
             {
-                if (Object.Equals(current.Data, item.Data))
+                if (Object.Equals(current.Data, item))
                 {
                     return true;
                 }
@@ -134,7 +138,7 @@ namespace GenericLinkedList
             return false;
         }
 
-        public void CopyTo(Node<T>[] array, int arrayIndex)
+        public void CopyTo(T[] array, int arrayIndex)
         {
             for (int i = 0; i < Count; i++)
             {
@@ -162,12 +166,12 @@ namespace GenericLinkedList
             get { return false; }
         }
 
-        public bool Remove(Node<T> item)
+        public bool Remove(T item)
         {
             Node<T> current = head;
             while (current.Next != null)
             {
-                if (Object.Equals(current.Next.Data, item.Data))
+                if (Object.Equals(current.Next.Data, item))
                 {
                     current.Next = current.Next.Next;
                     return true;
@@ -176,7 +180,7 @@ namespace GenericLinkedList
             return false;
         }
 
-        public IEnumerator<Node<T>> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return this.GetEnumerator();
         }
